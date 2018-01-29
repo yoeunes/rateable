@@ -70,11 +70,11 @@ class RateableTest extends TestCase
         Factory::create(Rating::class, ['rateable_id' => $lesson->id, 'value' => 2]);
         Factory::create(Rating::class, ['rateable_id' => $lesson->id, 'value' => 3]);
 
-        $this->assertEquals(40, $lesson->ratingPercent());
+        $this->assertEquals(40, $lesson->ratingPercentage());
     }
 
     /** @test */
-    public function it_pass()
+    public function it_rate_lesson_using_rating_builder()
     {
         /** @var Lesson */
         $lesson = Factory::create(Lesson::class);
@@ -87,6 +87,7 @@ class RateableTest extends TestCase
             ->user($user)
             ->rate(3);
 
-        dd($rating);
+        $this->assertEquals(3, $lesson->averageRating());
+        $this->assertEquals($rating->value, $lesson->averageRating());
     }
 }
