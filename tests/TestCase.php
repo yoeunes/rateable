@@ -2,11 +2,11 @@
 
 namespace Yoeunes\Rateable\Tests;
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Orchestra\Testbench\TestCase as BaseTestCase;
+use Illuminate\Database\Schema\Blueprint;
 use Yoeunes\Rateable\RateableServiceProvider;
 use Yoeunes\Rateable\Tests\Stubs\Models\User;
+use Orchestra\Testbench\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {

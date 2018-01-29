@@ -12,7 +12,7 @@ class Rating extends Model
      * @var array
      */
     protected $fillable = [
-        'value'
+        'value',
     ];
 
     /**

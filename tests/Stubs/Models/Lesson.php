@@ -2,8 +2,8 @@
 
 namespace Yoeunes\Rateable\Tests\Stubs\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Yoeunes\Rateable\Traits\Rateable;
+use Illuminate\Database\Eloquent\Model;
 
 class Lesson extends Model
 {

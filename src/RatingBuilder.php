@@ -2,14 +2,14 @@
 
 namespace Yoeunes\Rateable;
 
+use Yoeunes\Rateable\Models\Rating;
+use Yoeunes\Rateable\Traits\Rateable;
 use Illuminate\Database\Eloquent\Model;
 use Yoeunes\Rateable\Exceptions\EmptyUser;
 use Yoeunes\Rateable\Exceptions\InvalidRatingValue;
-use Yoeunes\Rateable\Exceptions\ModelDoesNotUseRateableTrait;
-use Yoeunes\Rateable\Exceptions\RateableModelNotFound;
 use Yoeunes\Rateable\Exceptions\UserDoestNotHaveID;
-use Yoeunes\Rateable\Models\Rating;
-use Yoeunes\Rateable\Traits\Rateable;
+use Yoeunes\Rateable\Exceptions\RateableModelNotFound;
+use Yoeunes\Rateable\Exceptions\ModelDoesNotUseRateableTrait;
 
 class RatingBuilder
 {
@@ -60,7 +60,7 @@ class RatingBuilder
     {
         $rating = new Rating();
 
-        throw_if($value< config('rateable.min') || $value > config('rateable.max'), InvalidRatingValue::class, 'Invalid rating value');
+        throw_if($value < config('rateable.min') || $value > config('rateable.max'), InvalidRatingValue::class, 'Invalid rating value');
         $rating->value  = $value;
 
         throw_if(empty($this->user), EmptyUser::class, 'Empty user');
@@ -68,7 +68,7 @@ class RatingBuilder
 
         throw_if(empty($this->rateable->id), RateableModelNotFound::class, 'Rateable model not found');
         $rating->rateable_type = get_class($this->rateable);
-        $rating->rateable_id = $this->rateable->id;
+        $rating->rateable_id   = $this->rateable->id;
 
         $rating->save();
 
