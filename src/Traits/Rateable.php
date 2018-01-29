@@ -27,17 +27,13 @@ trait Rateable
         return $this->ratings()->sum('value');
     }
 
-    public function userAverageRating(int $user_id = null)
+    public function userAverageRating(int $user_id)
     {
-        $user_id = $user_id ?? auth()->id();
-
         return $this->ratings()->where('user_id', $user_id)->avg('value');
     }
 
-    public function userSumRating(int $user_id = null)
+    public function userSumRating(int $user_id)
     {
-        $user_id = $user_id ?? auth()->id();
-
         return $this->ratings()->where('user_id', $user_id)->sum('value');
     }
 
