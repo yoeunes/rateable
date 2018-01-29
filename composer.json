@@ -1,0 +1,55 @@
+{
+    "name"             : "yoeunes/rateable",
+    "license"          : "MIT",
+    "description"      : "Laravel 5 package to allows multiple models to be rated with a fivestar like system.",
+    "homepage"         : "https://github.com/yoeunes/rateable",
+    "keywords"         : [
+        "laravel",
+        "rateable",
+        "rating",
+        "vote",
+        "rate",
+        "fivestar",
+        "laravel 5"
+    ],
+    "authors"          : [
+        {
+            "name"    : "Younes Khoubza",
+            "email"   : "younes.khoubza@gmail.com",
+            "homepage": "https://dalilbook.com",
+            "role"    : "Developer"
+        }
+    ],
+    "require"          : {
+        "php": ">=7.0.0",
+        "illuminate/database": "^5.5",
+        "illuminate/support": "^5.5"
+    },
+    "require-dev"      : {
+        "laracasts/testdummy": "^2.3",
+        "orchestra/testbench": "^3.5",
+        "phpunit/phpunit"    : "^6.5"
+    },
+    "autoload"         : {
+        "psr-4": {
+            "Yoeunes\\Rateable\\": "src"
+        }
+    },
+    "autoload-dev"     : {
+        "psr-4": {
+            "Yoeunes\\Rateable\\Tests\\": "tests"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable"    : true,
+    "extra"            : {
+        "laravel": {
+            "providers": [
+                "Yoeunes\\Rateable\\RateableServiceProvider"
+            ]
+        }
+    },
+    "config"           : {
+        "sort-packages": true
+    }
+}
