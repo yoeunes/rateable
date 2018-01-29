@@ -29,19 +29,17 @@ trait Rateable
 
     public function averageRatingForUser(int $user_id)
     {
-//        return $this->averageRating()->where('user_id', $user_id);
         return $this->ratings()->where('user_id', $user_id)->avg('value');
     }
 
     public function totalRatingForUser(int $user_id)
     {
-//        return $this->totalRating()->where('user_id', $user_id);
         return $this->ratings()->where('user_id', $user_id)->sum('value');
     }
 
-    public function ratingPercent(int $max = null)
+    public function ratingPercentage()
     {
-        $max = $max ?? config('rateable.max_rating');
+        $max = config('rateable.max_rating');
 
         $quantity = $this->ratings()->count();
 
@@ -55,9 +53,29 @@ trait Rateable
         return $this->ratings()->where('value', '>=', '0')->count();
     }
 
+    public function positiveRatingTotal()
+    {
+        return $this->ratings()->where('value', '>=', '0')->sum('value');
+    }
+
     public function negativeRatingCount()
     {
         return $this->ratings()->where('value', '<', '0')->count();
+    }
+
+    public function negativeRatingTotal()
+    {
+        return $this->ratings()->where('value', '<', '0')->sum('value');
+    }
+
+    public function isRated()
+    {
+        return $this->ratings()->exists();
+    }
+
+    public function isRatedBy(int $user_id)
+    {
+        return $this->ratings()->where('user_id', $user_id)->exists();
     }
 
     /**
