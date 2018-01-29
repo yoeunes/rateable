@@ -16,5 +16,5 @@ class Lesson extends Model
         'subject',
     ];
 
-    protected $appends = [ 'average_rating' ];
+    protected $appends = ['average_rating'];
 }
