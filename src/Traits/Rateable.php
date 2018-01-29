@@ -22,18 +22,20 @@ trait Rateable
         return $this->ratings()->avg('value');
     }
 
-    public function sumRating()
+    public function totalRating()
     {
         return $this->ratings()->sum('value');
     }
 
-    public function userAverageRating(int $user_id)
+    public function averageRatingForUser(int $user_id)
     {
+//        return $this->averageRating()->where('user_id', $user_id);
         return $this->ratings()->where('user_id', $user_id)->avg('value');
     }
 
-    public function userSumRating(int $user_id)
+    public function totalRatingForUser(int $user_id)
     {
+//        return $this->totalRating()->where('user_id', $user_id);
         return $this->ratings()->where('user_id', $user_id)->sum('value');
     }
 
@@ -43,7 +45,7 @@ trait Rateable
 
         $quantity = $this->ratings()->count();
 
-        $total = $this->sumRating();
+        $total = $this->totalRating();
 
         return ($quantity * $max) > 0 ? $total / (($quantity * $max) / 100) : 0;
     }
