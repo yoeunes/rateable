@@ -2,6 +2,7 @@
 
 namespace Yoeunes\Rateable\Traits;
 
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\DB;
 use Yoeunes\Rateable\Models\Rating;
 use Yoeunes\Rateable\RatingBuilder;
@@ -110,17 +111,11 @@ trait Rateable
 
     public function scopeOrderByAverageRating(Builder $query, string $direction = 'asc')
     {
-        $morph_map = config('rateable.morph_map');
-
-        $class = get_class($this);
-
-        $rateable_type = array_key_exists($class, $morph_map) ? $morph_map[$class] : $class;
-
         return $query
-            ->leftJoin('ratings', function (JoinClause $join) use ($rateable_type) {
+            ->leftJoin('ratings', function (JoinClause $join) {
                 $join
                     ->on('ratings.rateable_id', $this->getTable() . '.id')
-                    ->where('ratings.rateable_type', $rateable_type);
+                    ->where('ratings.rateable_type', Relation::getMorphedModel(get_class($this)) ?? get_class($this));
             })
             ->addSelect(DB::raw('AVG(ratings.value) as average_rating'))
             ->groupBy($this->getTable(). '.id')

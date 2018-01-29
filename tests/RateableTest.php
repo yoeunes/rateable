@@ -2,6 +2,7 @@
 
 namespace Yoeunes\Rateable\Tests;
 
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Laracasts\TestDummy\Factory;
 use Yoeunes\Rateable\Models\Rating;
 use Yoeunes\Rateable\Tests\Stubs\Models\User;
@@ -182,7 +183,7 @@ class RateableTest extends TestCase
     /** @test */
     public function it_order_lessons_by_most_rated_with_a_morph_map()
     {
-        config(['rateable.morph_map' => [Lesson::class => 'lessons']]);
+        Relation::morphMap([Lesson::class => 'lessons' ]);
 
         $lessons = Factory::times(3)->create(Lesson::class);
 
@@ -194,6 +195,7 @@ class RateableTest extends TestCase
         Factory::create(Rating::class, ['rateable_id' => $lessons[2]->id, 'rateable_type' => 'lessons', 'value' => 4]);
 
         $sortedLessons = Lesson::with('ratings')->select('lessons.*')->orderByAverageRating()->get();
+
         $this->assertEquals($lessons[1]->id, $sortedLessons[0]->id);
         $this->assertEquals($lessons[2]->id, $sortedLessons[1]->id);
         $this->assertEquals($lessons[0]->id, $sortedLessons[2]->id);

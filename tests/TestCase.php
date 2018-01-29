@@ -72,7 +72,6 @@ class TestCase extends BaseTestCase
             'user'       => User::class,
             'min_rating' => 0,
             'max_rating' => 5,
-            'morph_map'  => [],
         ]);
 
         Schema::create('lessons', function (Blueprint $table) {
