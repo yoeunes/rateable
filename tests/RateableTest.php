@@ -37,27 +37,54 @@ class RateableTest extends TestCase
     }
 
     /** @test */
-    public function it_return_ratings_count()
-    {
-        /** @var Lesson $lesson */
-        $lesson = Factory::create(Lesson::class);
-
-        Factory::times(3)->create(Rating::class, ['rateable_id' => $lesson->id]);
-
-        $this->assertEquals(3, $lesson->ratings()->count());
-    }
-
-    /** @test */
     public function it_return_average_rating_for_5_system_stars()
     {
         /** @var Lesson $lesson */
         $lesson = Factory::create(Lesson::class);
 
-        Factory::create(Rating::class, ['rateable_id' => $lesson->id, 'value' => 1]);
-        Factory::create(Rating::class, ['rateable_id' => $lesson->id, 'value' => 2]);
+        /** @var User $user */
+        $user = Factory::create(User::class);
+
+        Factory::create(Rating::class, ['rateable_id' => $lesson->id, 'value' => 1, 'user_id' => $user->id]);
+        Factory::create(Rating::class, ['rateable_id' => $lesson->id, 'value' => 2, 'user_id' => $user->id]);
         Factory::create(Rating::class, ['rateable_id' => $lesson->id, 'value' => 3]);
 
         $this->assertEquals(2, $lesson->averageRating());
+        $this->assertEquals(1.5, $lesson->averageRatingForUser($user->id));
+    }
+
+    /** @test */
+    public function it_return_total_rating_for_5_system_stars()
+    {
+        /** @var Lesson $lesson */
+        $lesson = Factory::create(Lesson::class);
+
+        /** @var User $user */
+        $user = Factory::create(User::class);
+
+        Factory::create(Rating::class, ['rateable_id' => $lesson->id, 'value' => 1, 'user_id' => $user->id]);
+        Factory::create(Rating::class, ['rateable_id' => $lesson->id, 'value' => 2, 'user_id' => $user->id]);
+        Factory::create(Rating::class, ['rateable_id' => $lesson->id, 'value' => 3]);
+
+        $this->assertEquals(6, $lesson->totalRating());
+        $this->assertEquals(3, $lesson->totalRatingForUser($user->id));
+    }
+
+    /** @test */
+    public function it_return_count_rating_for_5_system_stars()
+    {
+        /** @var Lesson $lesson */
+        $lesson = Factory::create(Lesson::class);
+
+        /** @var User $user */
+        $user = Factory::create(User::class);
+
+        Factory::create(Rating::class, ['rateable_id' => $lesson->id, 'value' => 1, 'user_id' => $user->id]);
+        Factory::create(Rating::class, ['rateable_id' => $lesson->id, 'value' => 2, 'user_id' => $user->id]);
+        Factory::create(Rating::class, ['rateable_id' => $lesson->id, 'value' => 3]);
+
+        $this->assertEquals(3, $lesson->countRating());
+        $this->assertEquals(2, $lesson->countRatingForUser($user->id));
     }
 
     /** @test */

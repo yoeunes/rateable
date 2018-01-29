@@ -22,6 +22,11 @@ trait Rateable
         return $this->ratings()->avg('value');
     }
 
+    public function countRating()
+    {
+        return $this->ratings()->count();
+    }
+
     public function totalRating()
     {
         return $this->ratings()->sum('value');
@@ -35,6 +40,11 @@ trait Rateable
     public function totalRatingForUser(int $user_id)
     {
         return $this->ratings()->where('user_id', $user_id)->sum('value');
+    }
+
+    public function countRatingForUser(int $user_id)
+    {
+        return $this->ratings()->where('user_id', $user_id)->count();
     }
 
     public function ratingPercentage()
