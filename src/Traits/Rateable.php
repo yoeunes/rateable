@@ -2,6 +2,7 @@
 
 namespace Yoeunes\Rateable\Traits;
 
+use Illuminate\Database\Eloquent\Builder;
 use Yoeunes\Rateable\Models\Rating;
 use Yoeunes\Rateable\RatingBuilder;
 
@@ -86,16 +87,6 @@ trait Rateable
     public function isRatedBy(int $user_id)
     {
         return $this->ratings()->where('user_id', $user_id)->exists();
-    }
-
-    public function mostRated()
-    {
-        return $this->ratings()->orderBy('value', 'asc');
-    }
-
-    public function lessRated()
-    {
-        return $this->ratings()->orderBy('value', 'desc');
     }
 
     /**
