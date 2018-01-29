@@ -1,8 +1,8 @@
 <?php
 
 use Yoeunes\Rateable\Models\Rating;
-use Yoeunes\Rateable\Tests\Stubs\Models\Lesson;
 use Yoeunes\Rateable\Tests\Stubs\Models\User;
+use Yoeunes\Rateable\Tests\Stubs\Models\Lesson;
 
 $factory(Lesson::class, [
     'title'   => $faker->sentence,

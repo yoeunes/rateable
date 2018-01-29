@@ -2,13 +2,13 @@
 
 namespace Yoeunes\Rateable\Tests;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Laracasts\TestDummy\Factory;
 use Yoeunes\Rateable\Models\Rating;
-use Yoeunes\Rateable\Tests\Stubs\Models\Lesson;
 use Yoeunes\Rateable\Tests\Stubs\Models\User;
+use Yoeunes\Rateable\Tests\Stubs\Models\Lesson;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class RateableTest extends TestCase
 {
