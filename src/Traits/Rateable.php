@@ -90,6 +90,23 @@ trait Rateable
     }
 
     /**
+     *
+     * to order by average_rating
+     *
+     * add protected $appends = [ 'average_rating' ]; to your model
+     *
+     * Lesson::all()->sortBy('average_rating')
+     * Lesson::with('relatedModel')->get()->sortBy('average_rating')
+     * Lesson::where('status', 'published')->get()->sortBy('average_rating')
+     *
+     * @return mixed
+     */
+    public function getAverageRatingAttribute()
+    {
+        return $this->averageRating();
+    }
+
+    /**
      * @return RatingBuilder
      *
      * @throws \Throwable
