@@ -90,4 +90,14 @@ class RateableTest extends TestCase
         $this->assertEquals(3, $lesson->averageRating());
         $this->assertEquals($rating->value, $lesson->averageRating());
     }
+
+    /** @test */
+    public function it_test_if_a_lesson_is_already_rated()
+    {
+        /** @var Lesson $lesson */
+        $lesson = Factory::create(Lesson::class);
+
+        Factory::create(Rating::class, ['rateable_id' => $lesson->id]);
+        $this->assertTrue($lesson->isRated());
+    }
 }
