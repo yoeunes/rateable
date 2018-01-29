@@ -115,7 +115,7 @@ trait Rateable
             ->leftJoin('ratings', function (JoinClause $join) {
                 $join
                     ->on('ratings.rateable_id', $this->getTable() . '.id')
-                    ->where('ratings.rateable_type', Relation::getMorphedModel(get_class($this)) ?? get_class($this));
+                    ->where('ratings.rateable_type', Relation::getMorphedModel(__CLASS__) ?? __CLASS__);
             })
             ->addSelect(DB::raw('AVG(ratings.value) as average_rating'))
             ->groupBy($this->getTable(). '.id')
