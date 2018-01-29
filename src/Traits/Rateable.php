@@ -43,7 +43,7 @@ trait Rateable
 
     public function ratingPercent(int $max = null)
     {
-        $max = $max ?? config('rating.max_rating');
+        $max = $max ?? config('rateable.max_rating');
 
         $quantity = $this->ratings()->count();
 

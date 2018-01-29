@@ -60,7 +60,7 @@ class RatingBuilder
     {
         $rating = new Rating();
 
-        throw_if($value < config('rateable.min') || $value > config('rateable.max'), InvalidRatingValue::class, 'Invalid rating value');
+        throw_if($value < config('rateable.min_rating') || $value > config('rateable.max_rating'), InvalidRatingValue::class, 'Invalid rating value');
         $rating->value  = $value;
 
         throw_if(empty($this->user), EmptyUser::class, 'Empty user');

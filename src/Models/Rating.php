@@ -28,6 +28,6 @@ class Rating extends Model
      */
     public function user()
     {
-        return $this->belongsTo(config('rating.user'));
+        return $this->belongsTo(config('rateable.user'));
     }
 }

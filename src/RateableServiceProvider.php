@@ -12,7 +12,7 @@ class RateableServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../config/rating.php' => config_path('rating.php'),
+            __DIR__.'/../config/rateable.php' => config_path('rateable.php'),
         ], 'config');
 
         if (! class_exists('CreateRatingsTable')) {
@@ -27,6 +27,6 @@ class RateableServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/rating.php', 'rating');
+        $this->mergeConfigFrom(__DIR__.'/../config/rateable.php', 'rateable');
     }
 }

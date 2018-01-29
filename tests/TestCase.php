@@ -68,7 +68,7 @@ class TestCase extends BaseTestCase
             ],
         ]);
 
-        $app['config']->set('rating', [
+        $app['config']->set('rateable', [
             'user'       => User::class,
             'min_rating' => 0,
             'max_rating' => 5,
