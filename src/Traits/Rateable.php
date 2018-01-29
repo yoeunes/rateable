@@ -89,8 +89,7 @@ trait Rateable
     }
 
     /**
-     *
-     * to order by average_rating
+     * to order by average_rating.
      *
      * add protected $appends = [ 'average_rating' ]; to your model
      *
