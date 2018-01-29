@@ -3,6 +3,7 @@
 namespace Yoeunes\Rateable\Traits;
 
 use Illuminate\Support\Facades\DB;
+use Yoeunes\Rateable\Exceptions\InvalidRatingValue;
 use Yoeunes\Rateable\Models\Rating;
 use Yoeunes\Rateable\RatingBuilder;
 use Illuminate\Database\Eloquent\Builder;
@@ -139,6 +140,36 @@ trait Rateable
     public function deleteRatingsForUser(int $user_id)
     {
         return $this->ratings()->where('user_id', $user_id)->delete();
+    }
+
+    /**
+     * @param int $user_id
+     * @param int $value
+     *
+     * @return int
+     *
+     * @throws \Throwable
+     */
+    public function updateRatingForUser(int $user_id, int $value)
+    {
+        throw_if($value < config('rateable.min_rating') || $value > config('rateable.max_rating'), InvalidRatingValue::class, 'Invalid rating value');
+
+        return $this->ratings()->where('user_id', $user_id)->update(['value' => $value]);
+    }
+
+    /**
+     * @param int $rating_id
+     * @param int $value
+     *
+     * @return int
+     *
+     * @throws \Throwable
+     */
+    public function updateRating(int $rating_id, int $value)
+    {
+        throw_if($value < config('rateable.min_rating') || $value > config('rateable.max_rating'), InvalidRatingValue::class, 'Invalid rating value');
+
+        return $this->ratings()->where('id', $rating_id)->update(['value' => $value]);
     }
 
     /**
