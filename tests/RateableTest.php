@@ -100,4 +100,17 @@ class RateableTest extends TestCase
         Factory::create(Rating::class, ['rateable_id' => $lesson->id]);
         $this->assertTrue($lesson->isRated());
     }
+
+    /** @test */
+    public function it_test_if_a_lesson_is_already_rated_by_a_user()
+    {
+        /** @var Lesson $lesson */
+        $lesson = Factory::create(Lesson::class);
+
+        /** @var User $user */
+        $user = Factory::create(User::class);
+
+        Factory::create(Rating::class, ['rateable_id' => $lesson->id, 'user_id' => $user->id]);
+        $this->assertTrue($lesson->isRatedBy($user->id));
+    }
 }
