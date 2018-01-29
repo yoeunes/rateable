@@ -159,4 +159,43 @@ class RateableTest extends TestCase
         Factory::create(Rating::class, ['rateable_id' => $lesson->id]);
         $this->assertFalse($lesson->isRatedBy(3));
     }
+
+    /** @test */
+    public function it_order_lessons_by_most_rated()
+    {
+        $lessons = Factory::times(3)->create(Lesson::class);
+
+        Factory::create(Rating::class, ['rateable_id' => $lessons[0]->id, 'value' => 5]);
+
+        Factory::create(Rating::class, ['rateable_id' => $lessons[1]->id, 'value' => 3]);
+        Factory::create(Rating::class, ['rateable_id' => $lessons[1]->id, 'value' => 1]);
+
+        Factory::create(Rating::class, ['rateable_id' => $lessons[2]->id, 'value' => 4]);
+
+        $sortedLessons = Lesson::select('lessons.*')->orderByAverageRating()->get();
+
+        $this->assertEquals(3, $sortedLessons->count());
+        $this->assertGreaterThan($sortedLessons[0]->averageRating(), $sortedLessons[1]->averageRating());
+        $this->assertGreaterThan($sortedLessons[1]->averageRating(), $sortedLessons[2]->averageRating());
+    }
+
+    /** @test */
+    public function it_order_lessons_by_most_rated_with_a_morph_map()
+    {
+        config(['rateable.morph_map' => [Lesson::class => 'lessons']]);
+
+        $lessons = Factory::times(3)->create(Lesson::class);
+
+        Factory::create(Rating::class, ['rateable_id' => $lessons[0]->id, 'rateable_type' => 'lessons', 'value' => 5]);
+
+        Factory::create(Rating::class, ['rateable_id' => $lessons[1]->id, 'rateable_type' => 'lessons', 'value' => 3]);
+        Factory::create(Rating::class, ['rateable_id' => $lessons[1]->id, 'rateable_type' => 'lessons', 'value' => 1]);
+
+        Factory::create(Rating::class, ['rateable_id' => $lessons[2]->id, 'rateable_type' => 'lessons', 'value' => 4]);
+
+        $sortedLessons = Lesson::with('ratings')->select('lessons.*')->orderByAverageRating()->get();
+        $this->assertEquals($lessons[1]->id, $sortedLessons[0]->id);
+        $this->assertEquals($lessons[2]->id, $sortedLessons[1]->id);
+        $this->assertEquals($lessons[0]->id, $sortedLessons[2]->id);
+    }
 }
