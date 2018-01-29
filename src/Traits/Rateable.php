@@ -2,7 +2,6 @@
 
 namespace Yoeunes\Rateable\Traits;
 
-use Illuminate\Database\Eloquent\Builder;
 use Yoeunes\Rateable\Models\Rating;
 use Yoeunes\Rateable\RatingBuilder;
 
