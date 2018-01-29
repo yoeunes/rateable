@@ -88,6 +88,16 @@ trait Rateable
         return $this->ratings()->where('user_id', $user_id)->exists();
     }
 
+    public function mostRated()
+    {
+        return $this->ratings()->orderBy('value', 'asc');
+    }
+
+    public function lessRated()
+    {
+        return $this->ratings()->orderBy('value', 'desc');
+    }
+
     /**
      * @return RatingBuilder
      *
