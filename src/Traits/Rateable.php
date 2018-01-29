@@ -126,6 +126,21 @@ trait Rateable
             ->orderBy('average_rating', $direction);
     }
 
+    public function deleteRating(int $rating_id)
+    {
+        return $this->ratings()->where('id', $rating_id)->delete();
+    }
+
+    public function resetRating()
+    {
+        return $this->ratings()->delete();
+    }
+
+    public function deleteRatingsForUser(int $user_id)
+    {
+        return $this->ratings()->where('user_id', $user_id)->delete();
+    }
+
     /**
      * @return RatingBuilder
      *

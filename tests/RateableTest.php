@@ -198,4 +198,44 @@ class RateableTest extends TestCase
         $this->assertEquals($lessons[2]->id, $sortedLessons[1]->id);
         $this->assertEquals($lessons[0]->id, $sortedLessons[2]->id);
     }
+
+    /** @test */
+    public function it_delete_rating_by_id()
+    {
+        /** @var Lesson $lesson */
+        $lesson = Factory::create(Lesson::class);
+
+        $ratings = Factory::times(3)->create(Rating::class, ['rateable_id' => $lesson->id]);
+
+        $lesson->deleteRating($ratings[1]->id);
+        $this->assertDatabaseMissing('ratings', ['id' => $ratings[1]->id]);
+    }
+
+    /** @test */
+    public function it_reset_rating_for_a_lesson()
+    {
+        /** @var Lesson $lesson */
+        $lesson = Factory::create(Lesson::class);
+
+        Factory::times(3)->create(Rating::class, ['rateable_id' => $lesson->id]);
+
+        $lesson->resetRating();
+        $this->assertEquals(0, $lesson->averageRating());
+    }
+
+    /** @test */
+    public function it_delete_rating_for_a_user()
+    {
+        /** @var Lesson $lesson */
+        $lesson = Factory::create(Lesson::class);
+
+        /** @var Lesson $lesson */
+        $user = Factory::create(User::class);
+
+        Factory::times(3)->create(Rating::class, ['rateable_id' => $lesson->id, 'user_id' => $user->id]);
+
+        $lesson->deleteRatingsForUser($user->id);
+
+        $this->assertEquals(0, $lesson->averageRatingForUser($user->id));
+    }
 }
