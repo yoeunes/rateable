@@ -11,7 +11,6 @@
     <a href="https://scrutinizer-ci.com/g/yoeunes/rateable/?branch=master"><img src="https://scrutinizer-ci.com/g/yoeunes/rateable/badges/coverage.png?b=master" alt="Code Coverage"></a>
     <a href="https://packagist.org/packages/yoeunes/rateable"><img src="https://poser.pugx.org/yoeunes/rateable/downloads" alt="Total Downloads"></a>
     <a href="https://packagist.org/packages/yoeunes/rateable"><img src="https://poser.pugx.org/yoeunes/rateable/license" alt="License"></a>
-    <a href="https://packagist.org/packages/yoeunes/rateable"><img src="https://poser.pugx.org/yoeunes/rateable/composerlock" alt=".lock"></a>
 </p>
 
 You can install the package using composer
