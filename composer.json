@@ -1,7 +1,7 @@
 {
     "name"             : "yoeunes/rateable",
     "license"          : "MIT",
-    "description"      : "Laravel 5 package to allows multiple models to be rated with a fivestar like system.",
+    "description"      : "Laravel 5 package to allows multiple models to be rated.",
     "homepage"         : "https://github.com/yoeunes/rateable",
     "keywords"         : [
         "laravel",
