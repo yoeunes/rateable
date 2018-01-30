@@ -70,10 +70,45 @@ All available APIs are listed below.
 
 #### `Yoeunes\Rateable\Traits\Rateable`
 
+### Create a rating
 ```php
-$lesson->averageRating()
-$lesson->averageRatingForUser($user_id)
+$user   = User::first();
+$lesson = Lesson::first();
 
+$rating = $lesson->getRatingBuilder()
+                 ->user($user) // you may also use $user->id
+                 ->uniqueRatingForUsers(true) // update if already rated
+                 ->rate(3);
+```
+### Update a rating
+```php
+$lesson = Lesson::first();
+
+$lesson->updateRating($rating_id, $value); // rating_id and the new rating value
+$lesson->updateRatingForUser($user_id, $value); // update all rating for a single user related to the lesson
+```
+
+### Delete a rating:
+```php
+$lesson = Lesson::first();
+$lesson->deleteRating($rating_id); // delete a rating with the giving id
+$lesson->deleteRatingsForUser($user_id); // delete all rating for a single user related to the lesson
+$lesson->resetRating(); // delete all rating related to the lesson
+```
+### check if a model is already rated:
+```php
+$lesson->isRated();
+$lesson->isRatedBy($user_id);// check if its already rated by the given user
+```
+
+### Fetch the average rating:
+```php
+$lesson->averageRating(); // get the average rating 
+$lesson->averageRatingForUser($user_id); // get the average rating for a single user
+```
+
+### other api methods:
+```php
 $lesson->countRating()
 $lesson->countRatingForUser($user_id)
 
@@ -86,24 +121,8 @@ $lesson->positiveRatingTotal()
 $lesson->negativeRatingCount()
 $lesson->negativeRatingTotal()
 
-$lesson->isRated()
-$lesson->isRatedBy($user_id)
-
-$lesson->deleteRating($rating_id)
-$lesson->resetRating()
-$lesson->deleteRatingsForUser($user_id)
-$lesson->updateRatingForUser($user_id, $value)
-$lesson->updateRating($rating_id, $value)
-
-
 Lesson::select('lessons.*')->orderByAverageRating('asc')->get()
 Lesson::select('lessons.*')->orderByAverageRating('desc')->get()
-
-$lesson
-    ->getRatingBuilder()
-    ->user($user)
-    ->rate(3);
-
 ```
 
 ### Query relations
