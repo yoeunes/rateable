@@ -17,7 +17,7 @@ class RateableServiceProvider extends ServiceProvider
 
         if (! class_exists('CreateRatingsTable')) {
             $this->publishes([
-                __DIR__.'/../database/migrations/create_ratings_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_ratings_table.php'),
+                __DIR__.'/../migrations/create_ratings_table.php' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_ratings_table.php'),
             ], 'migrations');
         }
     }
