@@ -16,7 +16,7 @@
 You can install the package using composer
 
 ```sh
-$ composer require yoeunes/rateable -vvv
+$ composer require yoeunes/rateable
 ```
 
 Then add the service provider to `config/app.php`
