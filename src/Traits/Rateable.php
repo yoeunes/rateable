@@ -2,13 +2,13 @@
 
 namespace Yoeunes\Rateable\Traits;
 
-use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\DB;
 use Yoeunes\Rateable\Models\Rating;
 use Yoeunes\Rateable\RatingBuilder;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\JoinClause;
 use Yoeunes\Rateable\Exceptions\InvalidRatingValue;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 trait Rateable
 {
