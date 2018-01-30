@@ -2,7 +2,6 @@
 
 namespace Yoeunes\Rateable;
 
-use Yoeunes\Rateable\Exceptions\ModelDoesNotUseRateableTrait;
 use Yoeunes\Rateable\Models\Rating;
 use Yoeunes\Rateable\Traits\Rateable;
 use Illuminate\Database\Eloquent\Model;
@@ -11,6 +10,7 @@ use Yoeunes\Rateable\Exceptions\InvalidRatingValue;
 use Yoeunes\Rateable\Exceptions\UserDoestNotHaveID;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Yoeunes\Rateable\Exceptions\RateableModelNotFound;
+use Yoeunes\Rateable\Exceptions\ModelDoesNotUseRateableTrait;
 
 class RatingBuilder
 {
