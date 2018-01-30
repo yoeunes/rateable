@@ -2,6 +2,7 @@
 
 namespace Yoeunes\Rateable;
 
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Yoeunes\Rateable\Models\Rating;
 use Yoeunes\Rateable\Traits\Rateable;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +17,8 @@ class RatingBuilder
     protected $user;
 
     protected $rateable;
+
+    protected $uniqueRatingForUsers = true;
 
     /**
      * @param Model|int $user
@@ -49,6 +52,13 @@ class RatingBuilder
         return $this;
     }
 
+    public function uniqueRatingForUsers(bool $unique)
+    {
+        $this->uniqueRatingForUsers = $unique;
+
+        return $this;
+    }
+
     /**
      * @param int $value
      *
@@ -58,17 +68,21 @@ class RatingBuilder
      */
     public function rate(int $value)
     {
-        $rating = new Rating();
-
         throw_if($value < config('rateable.min_rating') || $value > config('rateable.max_rating'), InvalidRatingValue::class, 'Invalid rating value');
-        $rating->value  = $value;
 
         throw_if(empty($this->user), EmptyUser::class, 'Empty user');
-        $rating->user_id = $this->user;
 
         throw_if(empty($this->rateable->id), RateableModelNotFound::class, 'Rateable model not found');
-        $rating->rateable_type = get_class($this->rateable);
-        $rating->rateable_id   = $this->rateable->id;
+
+        $data = [
+            'user_id'       => $this->user,
+            'rateable_id'   => $this->rateable->id,
+            'rateable_type' => Relation::getMorphedModel(get_class($this->rateable)) ?? get_class($this->rateable),
+        ];
+
+        $rating = $this->uniqueRatingForUsers ? Rating::firstOrNew($data) : (new Rating())->fill($data);
+
+        $rating->value = $value;
 
         $rating->save();
 
