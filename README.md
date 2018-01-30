@@ -19,10 +19,14 @@ You can install the package using composer
 $ composer require yoeunes/rateable
 ```
 
-Then add the service provider to `config/app.php`
+Then add the service provider to `config/app.php`. In Laravel versions 5.5 and beyond, this step can be skipped if package auto-discovery is enabled.
 
 ```php
-Yoeunes\Rateable\RateableServiceProvider::class
+'providers' => [
+    ...
+    Yoeunes\Rateable\RateableServiceProvider::class
+    ...
+];
 ```
 
 Publish the migrations file:
@@ -107,7 +111,6 @@ $lesson
 ```php
 $ratings = $user->ratings
 $ratings = $user->ratings()->where('id', '>', 10)->get()
-$ratings = $user->ratings()->orderByDesc('id')->get()
 ```
 
 ## License
