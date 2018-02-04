@@ -114,6 +114,15 @@ $lesson->raters()->where('name', 'like', '%yoeunes%')->get();
 $lesson->raters()->orderBy('name')->get();
 ```
 
+### get count ratings between by dates
+```php
+$lesson->countRatingsByDate('2018-02-03 13:23:03', '2018-02-06 15:26:06');
+$lesson->countRatingsByDate('2018-02-03 13:23:03');
+$lesson->countRatingsByDate(null, '2018-02-06 15:26:06');
+$lesson->countRatingsByDate(Carbon::now()->parse('01-04-2017'), Carbon::now()->parse('01-06-2017'));
+$lesson->countRatingsByDate(Carbon::now()->subDays(2));
+```
+
 ### other api methods:
 ```php
 $lesson->countRating()
@@ -138,6 +147,36 @@ Lesson::select('lessons.*')->orderByAverageRating('desc')->get()
 $ratings = $user->ratings
 $ratings = $user->ratings()->where('id', '>', 10)->get()
 ```
+
+### date transformer
+
+Because we all love having to repeat less, this package allows you to define date transformers. Let's say we are using the following code a lot: $lesson->countRatingsByDate(Carbon::now()->subDays(3)). It can get a little bit annoying and unreadable. Let's solve that!
+
+If you've published the configuration file, you will see something like this:
+
+```php
+'date-transformers' => [
+    // 'past24hours' => Carbon::now()->subDays(1),
+    // 'past7days'   => Carbon::now()->subWeeks(1),
+    // 'past14days'  => Carbon::now()->subWeeks(2),
+],
+```
+
+They are all commented out as default. To make them available, simply uncomment them. The provided ones are serving as an example. You can remove them or add your own ones.
+
+```php
+'date-transformers' => [
+    'past3days' => Carbon::now()->subDays(3),
+],
+```
+
+We can now retrieve the rating count like this:
+
+```php
+$lesson->countRatingsByDate('past3days');
+```
+
+
 
 ## License
 
