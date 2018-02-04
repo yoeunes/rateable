@@ -107,6 +107,13 @@ $lesson->averageRating(); // get the average rating
 $lesson->averageRatingForUser($user_id); // get the average rating for a single user
 ```
 
+### get list of users who rated a model (raters):
+```php
+$lesson->raters()->get();
+$lesson->raters()->where('name', 'like', '%yoeunes%')->get();
+$lesson->raters()->orderBy('name')->get();
+```
+
 ### other api methods:
 ```php
 $lesson->countRating()
