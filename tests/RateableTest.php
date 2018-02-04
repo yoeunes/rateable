@@ -240,4 +240,50 @@ class RateableTest extends TestCase
 
         $this->assertEquals(0, $lesson->averageRatingForUser($user->id));
     }
+
+    /** @test */
+    public function it_get_raters_for_a_specific_lesson()
+    {
+        /** @var Lesson $lesson */
+        $lesson = Factory::create(Lesson::class);
+
+        $users = Factory::times(2)->create(User::class);
+
+        Factory::create(Rating::class, ['rateable_id' => $lesson->id, 'user_id' => $users[0]->id]);
+        Factory::create(Rating::class, ['rateable_id' => $lesson->id, 'user_id' => $users[1]->id]);
+        Factory::times(3)->create(Rating::class, ['rateable_id' => $lesson->id]);
+        Factory::times(4)->create(Rating::class);
+
+        $this->assertCount(5, $lesson->ratings()->get());
+    }
+
+    /** @test */
+    public function it_get_votes_from_start_date()
+    {
+        /** @var Lesson $lesson */
+        $lesson = Factory::create(Lesson::class);
+
+        $votes = Factory::times(5)->create(Rating::class, ['rateable_id' => $lesson->id, 'value' => 1]);
+
+        $votes[0]->created_at = '2018-02-01 11:21:01';
+        $votes[0]->save();
+
+        $votes[1]->created_at = '2018-02-02 12:22:02';
+        $votes[1]->save();
+
+        $votes[2]->created_at = '2018-02-03 13:23:03';
+        $votes[2]->save();
+
+        $votes[3]->created_at = '2018-02-04 14:24:04';
+        $votes[3]->save();
+
+        $votes[4]->created_at = '2018-02-05 15:25:05';
+        $votes[4]->save();
+
+        $this->assertEquals(5, $lesson->countRatingsByDate());
+        $this->assertEquals(3, $lesson->countRatingsByDate('2018-02-03 13:23:03'));
+        $this->assertEquals(0, $lesson->countRatingsByDate('2018-02-06 15:26:06'));
+        $this->assertEquals(2, $lesson->countRatingsByDate('2018-02-03 13:23:03', '2018-02-04 14:24:04'));
+        $this->assertEquals(2, $lesson->countRatingsByDate(null, '2018-02-02 12:22:02'));
+    }
 }

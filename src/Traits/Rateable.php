@@ -177,4 +177,24 @@ trait Rateable
         return (new RatingBuilder())
             ->rateable($this);
     }
+
+    public function raters()
+    {
+        return $this->morphToMany(config('rateable.user'), 'rateable', 'ratings');
+    }
+
+    public function countRatingsByDate($from = null, $to = null)
+    {
+        $query = $this->ratings();
+
+        if (! empty($from) && empty($to)) {
+            $query->where('created_at', '>=', date_transformer($from));
+        } elseif (empty($from) && ! empty($to)) {
+            $query->where('created_at', '<=', date_transformer($to));
+        } elseif (! empty($from) && ! empty($to)) {
+            $query->whereBetween('created_at', [date_transformer($from), date_transformer($to)]);
+        }
+
+        return $query->sum('value');
+    }
 }
