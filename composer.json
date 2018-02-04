@@ -1,7 +1,7 @@
 {
     "name"             : "yoeunes/rateable",
     "license"          : "MIT",
-    "description"      : "Laravel 5 package to allows multiple models to be rated.",
+    "description"      : ":heart: This package helps you to add user based rating system to your model. https://dalilbook.com",
     "homepage"         : "https://github.com/yoeunes/rateable",
     "keywords"         : [
         "laravel",
