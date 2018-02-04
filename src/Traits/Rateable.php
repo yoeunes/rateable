@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\JoinClause;
 use Yoeunes\Rateable\Exceptions\InvalidRatingValue;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Yoeunes\Rateable\RatingQueryBuilder;
 
 trait Rateable
 {
@@ -196,5 +197,10 @@ trait Rateable
         }
 
         return $query->sum('value');
+    }
+
+    public function getRatingQueryBuilder()
+    {
+        return new RatingQueryBuilder($this->ratings());
     }
 }
