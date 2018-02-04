@@ -1,7 +1,7 @@
 {
     "name"             : "yoeunes/rateable",
     "license"          : "MIT",
-    "description"      : ":heart: This package helps you to add user based rating system to your model. https://dalilbook.com",
+    "description"      : "This package helps you to add user based rating system to your model.",
     "homepage"         : "https://github.com/yoeunes/rateable",
     "keywords"         : [
         "laravel",
