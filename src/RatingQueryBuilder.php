@@ -64,7 +64,7 @@ class RatingQueryBuilder
             ->leftJoin('ratings', function (JoinClause $join) use ($rateable) {
                 $join
                     ->on('ratings.rateable_id', $rateable->getTable() . '.id')
-                    ->where('ratings.rateable_type', Relation::getMorphedModel(get_class($rateable)) ?? get_class($rateable));
+                    ->where('ratings.rateable_type', morph_type($rateable));
             });
 
         return $this;

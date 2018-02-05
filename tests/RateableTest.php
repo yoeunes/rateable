@@ -181,27 +181,6 @@ class RateableTest extends TestCase
     }
 
     /** @test */
-    public function it_order_lessons_by_most_rated_with_a_morph_map()
-    {
-        Relation::morphMap(['lessons' => Lesson::class]);
-
-        $lessons = Factory::times(3)->create(Lesson::class);
-
-        Factory::create(Rating::class, ['rateable_id' => $lessons[0]->id, 'rateable_type' => 'lessons', 'value' => 5]);
-
-        Factory::create(Rating::class, ['rateable_id' => $lessons[1]->id, 'rateable_type' => 'lessons', 'value' => 3]);
-        Factory::create(Rating::class, ['rateable_id' => $lessons[1]->id, 'rateable_type' => 'lessons', 'value' => 1]);
-
-        Factory::create(Rating::class, ['rateable_id' => $lessons[2]->id, 'rateable_type' => 'lessons', 'value' => 4]);
-
-        $sortedLessons = Lesson::with('ratings')->select('lessons.*')->orderByAverageRating()->get();
-
-        $this->assertEquals($lessons[1]->id, $sortedLessons[0]->id);
-        $this->assertEquals($lessons[2]->id, $sortedLessons[1]->id);
-        $this->assertEquals($lessons[0]->id, $sortedLessons[2]->id);
-    }
-
-    /** @test */
     public function it_delete_rating_by_id()
     {
         /** @var Lesson $lesson */
@@ -285,5 +264,26 @@ class RateableTest extends TestCase
         $this->assertEquals(0, $lesson->countRatingsByDate('2018-02-06 15:26:06'));
         $this->assertEquals(2, $lesson->countRatingsByDate('2018-02-03 13:23:03', '2018-02-04 14:24:04'));
         $this->assertEquals(2, $lesson->countRatingsByDate(null, '2018-02-02 12:22:02'));
+    }
+
+    /** @test */
+    public function it_order_lessons_by_most_rated_with_a_morph_map()
+    {
+        Relation::morphMap(['lessons' => Lesson::class]);
+
+        $lessons = Factory::times(3)->create(Lesson::class);
+
+        Factory::create(Rating::class, ['rateable_id' => $lessons[0]->id, 'rateable_type' => 'lessons', 'value' => 5]);
+
+        Factory::create(Rating::class, ['rateable_id' => $lessons[1]->id, 'rateable_type' => 'lessons', 'value' => 3]);
+        Factory::create(Rating::class, ['rateable_id' => $lessons[1]->id, 'rateable_type' => 'lessons', 'value' => 1]);
+
+        Factory::create(Rating::class, ['rateable_id' => $lessons[2]->id, 'rateable_type' => 'lessons', 'value' => 4]);
+
+        $sortedLessons = Lesson::with('ratings')->select('lessons.*')->orderByAverageRating()->get();
+
+        $this->assertEquals($lessons[1]->id, $sortedLessons[0]->id);
+        $this->assertEquals($lessons[2]->id, $sortedLessons[1]->id);
+        $this->assertEquals($lessons[0]->id, $sortedLessons[2]->id);
     }
 }

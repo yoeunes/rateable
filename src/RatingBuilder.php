@@ -77,7 +77,7 @@ class RatingBuilder
         $data = [
             'user_id'       => $this->user,
             'rateable_id'   => $this->rateable->id,
-            'rateable_type' => Relation::getMorphedModel(get_class($this->rateable)) ?? get_class($this->rateable),
+            'rateable_type' => morph_type($this->rateable),
         ];
 
         $ratingModel = config('rateable.rating');
