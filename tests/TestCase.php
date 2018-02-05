@@ -70,9 +70,9 @@ class TestCase extends BaseTestCase
 
         $app['config']->set('rateable', [
             'rating'         => \Yoeunes\Rateable\Models\Rating::class,
-            'user'       => User::class,
-            'min_rating' => 0,
-            'max_rating' => 5,
+            'user'           => User::class,
+            'min_rating'     => 0,
+            'max_rating'     => 5,
         ]);
 
         Schema::create('lessons', function (Blueprint $table) {
