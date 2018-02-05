@@ -183,7 +183,7 @@ class RateableTest extends TestCase
     /** @test */
     public function it_order_lessons_by_most_rated_with_a_morph_map()
     {
-        Relation::morphMap([Lesson::class => 'lessons']);
+        Relation::morphMap(['lessons' => Lesson::class]);
 
         $lessons = Factory::times(3)->create(Lesson::class);
 
