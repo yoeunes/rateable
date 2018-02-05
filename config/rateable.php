@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'rating'         => Yoeunes\Rateable\Models\Rating::class,
     'user'           => App\User::class,
     'min_rating'     => 0,
     'max_rating'     => 5,

@@ -80,7 +80,9 @@ class RatingBuilder
             'rateable_type' => Relation::getMorphedModel(get_class($this->rateable)) ?? get_class($this->rateable),
         ];
 
-        $rating = $this->uniqueRatingForUsers ? Rating::firstOrNew($data) : (new Rating())->fill($data);
+        $ratingModel = config('rateable.rating');
+
+        $rating = $this->uniqueRatingForUsers ? (new $ratingModel)->firstOrNew($data) : (new $ratingModel)->fill($data);
 
         $rating->value = $value;
 

@@ -3,7 +3,6 @@
 namespace Yoeunes\Rateable\Traits;
 
 use Illuminate\Support\Facades\DB;
-use Yoeunes\Rateable\Models\Rating;
 use Yoeunes\Rateable\RatingBuilder;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\JoinClause;
@@ -20,7 +19,7 @@ trait Rateable
      */
     public function ratings()
     {
-        return $this->morphMany(Rating::class, 'rateable');
+        return $this->morphMany(config('rateable.rating'), 'rateable');
     }
 
     public function averageRating()
