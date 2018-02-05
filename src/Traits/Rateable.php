@@ -8,7 +8,6 @@ use Yoeunes\Rateable\RatingQueryBuilder;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\JoinClause;
 use Yoeunes\Rateable\Exceptions\InvalidRatingValue;
-use Illuminate\Database\Eloquent\Relations\Relation;
 
 trait Rateable
 {

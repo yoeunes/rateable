@@ -19,7 +19,7 @@ if (! function_exists('date_transformer')) {
 if (! function_exists('morph_type')) {
     function morph_type($rateable)
     {
-        if($rateable instanceof Model) {
+        if ($rateable instanceof Model) {
             $rateable = get_class($rateable);
         }
 
