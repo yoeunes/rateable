@@ -1,6 +1,6 @@
 <?php
 
-namespace Yoeunes\Rateable;
+namespace Yoeunes\Rateable\Builders;
 
 use Yoeunes\Rateable\Traits\Rateable;
 use Illuminate\Database\Eloquent\Model;

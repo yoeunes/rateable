@@ -19,4 +19,8 @@ return [
         // 'past7days'   => Carbon::now()->subWeeks(1),
         // 'past14days'  => Carbon::now()->subWeeks(2),
     ],
+
+    'resources' => [
+        ''
+    ],
 ];

@@ -3,6 +3,7 @@
 namespace Yoeunes\Rateable;
 
 use Illuminate\Support\ServiceProvider;
+use Yoeunes\Rateable\Services\Raty;
 
 class RateableServiceProvider extends ServiceProvider
 {
@@ -28,5 +29,9 @@ class RateableServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/../config/rateable.php', 'rateable');
+
+        $this->app->bind('raty', function () {
+            return new Raty();
+        });
     }
 }

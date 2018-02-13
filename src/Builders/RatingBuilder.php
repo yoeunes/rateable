@@ -1,6 +1,6 @@
 <?php
 
-namespace Yoeunes\Rateable;
+namespace Yoeunes\Rateable\Builders;
 
 use Yoeunes\Rateable\Models\Rating;
 use Yoeunes\Rateable\Traits\Rateable;
@@ -19,6 +19,17 @@ class RatingBuilder
     protected $rateable;
 
     protected $uniqueRatingForUsers = true;
+
+    public function __construct()
+    {
+        if (config('rateable.auth_user')) {
+            $this->user = auth()->id();
+        }
+
+        if (config('rateable.user_rate_once')) {
+            $this->uniqueVoteForUsers = true;
+        }
+    }
 
     /**
      * @param Model|int $user
