@@ -6,7 +6,6 @@ use Yoeunes\Rateable\Traits\Rateable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\JoinClause;
 use Yoeunes\Rateable\Exceptions\UserDoestNotHaveID;
-use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Yoeunes\Rateable\Exceptions\ModelDoesNotUseRateableTrait;
 

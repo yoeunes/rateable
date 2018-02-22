@@ -2,7 +2,6 @@
 
 namespace Yoeunes\Rateable\Tests;
 
-use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Yoeunes\Rateable\RateableServiceProvider;
