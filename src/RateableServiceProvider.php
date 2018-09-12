@@ -2,8 +2,8 @@
 
 namespace Yoeunes\Rateable;
 
-use Illuminate\Support\ServiceProvider;
 use Yoeunes\Rateable\Services\Raty;
+use Illuminate\Support\ServiceProvider;
 
 class RateableServiceProvider extends ServiceProvider
 {
