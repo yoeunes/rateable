@@ -3,10 +3,10 @@
 namespace Yoeunes\Rateable\Traits;
 
 use Illuminate\Support\Facades\DB;
-use Yoeunes\Rateable\Builders\RatingBuilder;
-use Yoeunes\Rateable\Builders\RatingQueryBuilder;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\JoinClause;
+use Yoeunes\Rateable\Builders\RatingBuilder;
+use Yoeunes\Rateable\Builders\RatingQueryBuilder;
 use Yoeunes\Rateable\Exceptions\InvalidRatingValue;
 
 trait Rateable

@@ -1,8 +1,8 @@
 <?php
 
+use Yoeunes\Rateable\Services\Raty;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Yoeunes\Rateable\Services\Raty;
 
 if (! function_exists('date_transformer')) {
     function date_transformer($value)
@@ -28,14 +28,14 @@ if (! function_exists('morph_type')) {
     }
 }
 
-if (!function_exists('raty_js')) {
+if (! function_exists('raty_js')) {
     function raty_js($version = null, $src = null)
     {
-        if(null === $version) {
+        if (null === $version) {
             $version = config('rateable.raty.version');
         }
 
-        if(null === $src) {
+        if (null === $src) {
             $src = 'https://cdnjs.cloudflare.com/ajax/libs/raty/'.$version.'/jquery.raty.min.js';
         }
 
@@ -43,14 +43,14 @@ if (!function_exists('raty_js')) {
     }
 }
 
-if (!function_exists('raty_css')) {
+if (! function_exists('raty_css')) {
     function raty_css($version = null, $href = null)
     {
-        if(null === $version) {
+        if (null === $version) {
             $version = config('rateable.raty.version');
         }
 
-        if(null === $href) {
+        if (null === $href) {
             $href = 'https://cdnjs.cloudflare.com/ajax/libs/raty/'.$version.'/jquery.raty.min.css';
         }
 
@@ -58,7 +58,7 @@ if (!function_exists('raty_css')) {
     }
 }
 
-if (!function_exists('jquery')) {
+if (! function_exists('jquery')) {
     function jquery($version = '3.3.1', $src = null)
     {
         if (null === $src) {
@@ -69,7 +69,7 @@ if (!function_exists('jquery')) {
     }
 }
 
-if (!function_exists('raty')) {
+if (! function_exists('raty')) {
     /**
      * @param string $element
      *
